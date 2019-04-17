@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WebGL Graphics</title>
+    <style>
+      .slidecontainer, .container {
+        width: 400px; /* Width of the outside container */
+        margin-top: 10px;
+      }
+
+      .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 15px; /* Specified height */
+        background: #d3d3d3; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+      }
+
+      /* Mouse-over effects */
+      .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+      }
+
+      /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 15px; /* Set a specific slider handle width */
+        height: 15px; /* Slider handle height */
+        background: #4CAF50; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+
+      .slider::-moz-range-thumb {
+        width: 15px; /* Set a specific slider handle width */
+        height: 15px; /* Slider handle height */
+        background: #4CAF50; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+      }
+
+      p, span {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        margin: 0;
+      }
+
+      span {
+        color: red;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+    <div class="slidecontainer">
+      <p>Perspective: <span id="perspective-value">20</span></p>
+      <input type="range" min="1" max="50" value="20" class="slider" id="perspective">
+    </div>
+    <div class="slidecontainer">
+      <p>Camera Position xView [-10, 10]: <span id="x-view-value">0</span></p>
+      <input type="range" min="-10" max="10" value="0" step="0.1" class="slider" id="x-view">
+    </div>
+    <div class="slidecontainer">
+      <p>Camera Position yView [-10, 10]: <span id="y-view-value">0</span></p>
+      <input type="range" min="-10" max="10" value="0" step="0.1" class="slider" id="y-view">
+    </div>
+    <div class="slidecontainer">
+      <p>Camera Position zView [-50, 50]: <span id="z-view-value">15</span></p>
+      <input type="range" min="-50" max="50" value="15" step="0.1" class="slider" id="z-view">
+    </div>
+    <div class="container">
+      <p>Buliding Action: </p>
+      <button id="left">Open/Close left door</button>
+      <button id="right">Open/Close right door</button>
+    </div>
+    <div class="container">
+      <p>Person Action: </p>
+      <button id="human+">Speed up walking speed</button>
+      <button id="human-">Slow down walking speed</button>
+    </div>
+    <div class="container">
+      <p>Red Car Action: </p>
+      <button id="red+">Speed up red car speed</button>
+      <button id="red-">Slow down red car speed</button>
+    </div>
+    <div class="container">
+      <p>Green Car Action: </p>
+      <button id="green+">Speed up green car speed</button>
+      <button id="green-">Slow down green car speed</button>
+    </div>
+    <script src="lib/webgl-utils.js"></script>
+    <script src="lib/webgl-debug.js"></script>
+    <script src="lib/cuon-utils.js"></script>
+    <script src="lib/cuon-matrix.js"></script>
+    <script src="js/durham.js"></script>
+    <script>
+      function strip(number) {
+        return (parseFloat(number).toPrecision(2));
+      }
+      document.getElementById("perspective").oninput = function(){
+        document.getElementById("perspective-value").innerHTML = strip(this.value);
+      }
+      document.getElementById("x-view").oninput = function(){
+        document.getElementById("x-view-value").innerHTML = strip(this.value);
+      }
+      document.getElementById("y-view").oninput = function(){
+        document.getElementById("y-view-value").innerHTML = strip(this.value);
+      }
+      document.getElementById("z-view").oninput = function(){
+        document.getElementById("z-view-value").innerHTML = strip(this.value);
+      }
+    </script>
+  </body>
+</html>
